@@ -1,6 +1,5 @@
 .gradle
 build/
-sandbox/build
 out/
 
 # Ignore Gradle GUI config
