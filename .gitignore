@@ -1,5 +1,7 @@
 .gradle
-/build/
+build/
+sandbox/build
+out/
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -13,10 +15,4 @@ gradle-app.setting
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
 .idea/workspace.xml
-sandbox/build/classes/java/main/MyFirstProgram.class
-sandbox/build/distributions/sandbox.tar
-sandbox/build/distributions/sandbox.zip
-sandbox/build/libs/sandbox.jar
-sandbox/build/scripts/sandbox
-sandbox/build/scripts/sandbox.bat
-sandbox/build/tmp/jar/MANIFEST.MF
+
