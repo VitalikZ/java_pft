@@ -11,15 +11,19 @@ public class Point {
         this.b = b;
     }
 
-
-
-    public static double distance(double a, double b){
+    double distance(double a, double b) {
 
         double dx = this.a - a;
 
         double dy = this.b - b;
 
         return Math.sqrt(dx*dx + dy*dy);
+
+    }
+
+    double distance(Point p) {
+
+        return distance(p.a, p.b);
 
     }
 }
