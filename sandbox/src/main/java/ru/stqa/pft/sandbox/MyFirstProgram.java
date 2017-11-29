@@ -7,7 +7,13 @@ public class MyFirstProgram {
     Point point1 = new Point(0, 0);
     Point point2 = new Point(3, 4);
 
-    System.out.println("Дистанция между точками = " + point1.distance(point2));
+    String textDistance = "Дистанция между точками = ";
+
+    System.out.println(textDistance + point1.distance(point2));
+
+
+
+
 
   }
 }
