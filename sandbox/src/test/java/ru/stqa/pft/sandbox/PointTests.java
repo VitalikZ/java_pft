@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 
 public class PointTests {
 
-
   @Test
   public void testPointDistanceIsWright() {
     Point point1 = new Point(0, 0);
