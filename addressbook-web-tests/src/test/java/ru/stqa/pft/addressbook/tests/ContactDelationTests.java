@@ -10,5 +10,6 @@ public class ContactDelationTests extends TestBase{
     app.getContactHelper().chooseRandomContact();
     app.getContactHelper().submitContactDeletion();
     app.getContactHelper().acceptDeletionAlert();
+    app.getNavigationHelper().goToHomePage();
   }
 }
