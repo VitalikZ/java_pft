@@ -5,8 +5,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class NavigationHelper extends HelperBase{
 
-  private FirefoxDriver wd;
-
   public NavigationHelper(FirefoxDriver wd) {
     super(wd);
   }
