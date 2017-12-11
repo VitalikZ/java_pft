@@ -28,14 +28,13 @@ public class ApplicationManager {
   public void init() {
     if (Objects.equals(browser, BrowserType.FIREFOX)) {
       wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("/usr/lib/firefox-esr/firefox-esr"));
-      wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     } else if (Objects.equals(browser, BrowserType.CHROME)){
       wd = new ChromeDriver();
     } else if (Objects.equals(browser, BrowserType.IE)){
       wd = new InternetExplorerDriver();
     }
 
-
+    wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/group.php");
     groupHelper = new GroupHelper(wd);
     navigationHelper = new NavigationHelper(wd);
