@@ -14,6 +14,10 @@ public class ContactHelper extends HelperBase {
     super(wd);
   }
 
+  public void goToContactList() {
+    click(By.linkText("home"));
+  }
+
   public void goToAddNewContactPage() {
     click(By.linkText("add new"));
   }
@@ -44,7 +48,7 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
 
-  public void chooseRandomContact() {
+  public void selectContact() {
     click(By.name("selected[]"));
   }
 
@@ -62,5 +66,16 @@ public class ContactHelper extends HelperBase {
 
   public void acceptDeletionAlert() {
     wd.switchTo().alert().accept();
+  }
+
+  public void createContact(ContactData contact) {
+    goToAddNewContactPage();
+    fillAddNewContactForm(contact);
+    submitContactCreation();
+    goToContactList();
+  }
+
+  public boolean isThereAContact() {
+    return isElementPresent(By.name("selected[]"));
   }
 }
