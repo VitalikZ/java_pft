@@ -37,7 +37,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("mobile"), contactData.getMobilePhone());
     type(By.name("email"), contactData.getEmailOne());
 
-    if(creation){
+    if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
@@ -77,5 +77,10 @@ public class ContactHelper extends HelperBase {
 
   public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
+  }
+
+  public int getContactCounter() {
+    return wd.findElements(By.name("selected[]")).size();
+
   }
 }
