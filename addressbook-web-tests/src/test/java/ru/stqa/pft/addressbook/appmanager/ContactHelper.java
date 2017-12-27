@@ -1,9 +1,7 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
@@ -14,7 +12,7 @@ public class ContactHelper extends HelperBase {
     super(wd);
   }
 
-  public void goToContactList() {
+  public void goToContactListPage() {
     click(By.linkText("home"));
   }
 
@@ -72,7 +70,7 @@ public class ContactHelper extends HelperBase {
     goToAddNewContactPage();
     fillAddNewContactForm(contact);
     submitContactCreation();
-    goToContactList();
+    goToContactListPage();
   }
 
   public boolean isThereAContact() {

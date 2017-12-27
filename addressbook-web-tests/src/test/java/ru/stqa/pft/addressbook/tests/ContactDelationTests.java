@@ -8,7 +8,7 @@ public class ContactDelationTests extends TestBase{
 
   @Test
   public void testDeleteContact(){
-    app.getNavigationHelper().goToHomePage();
+    app.getContactHelper().goToContactListPage();
     int before = app.getContactHelper().getContactCounter();
     if(! app.getContactHelper().isThereAContact()){
       app.getContactHelper().createContact(new ContactData("name_test", "lastname_test", "address_test", "+380731234567", "email-one.test@test.com", "test1"));
