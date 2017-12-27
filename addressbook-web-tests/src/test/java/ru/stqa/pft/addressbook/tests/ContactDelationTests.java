@@ -13,7 +13,7 @@ public class ContactDelationTests extends TestBase{
     if(! app.getContactHelper().isThereAContact()){
       app.getContactHelper().createContact(new ContactData("name_test", "lastname_test", "address_test", "+380731234567", "email-one.test@test.com", "test1"));
     }
-    app.getContactHelper().selectContact();
+    app.getContactHelper().editContactButton(before -1);
     app.getContactHelper().submitContactDeletion();
     app.getContactHelper().acceptDeletionAlert();
     app.getNavigationHelper().goToHomePage();
