@@ -9,14 +9,14 @@ public class ContactDelationTests extends TestBase{
   @Test
   public void testDeleteContact(){
     app.getContactHelper().goToContactListPage();
-    int before = app.getContactHelper().getContactCounter();
     if(! app.getContactHelper().isThereAContact()){
       app.getContactHelper().createContact(new ContactData("name_test", "lastname_test", "address_test", "+380731234567", "email-one.test@test.com", "test1"));
     }
-    app.getContactHelper().editContactButton(before -1);
+    int before = app.getContactHelper().getContactCounter();
+    app.getContactHelper().selectContact(before -1);
     app.getContactHelper().submitContactDeletion();
     app.getContactHelper().acceptDeletionAlert();
-    app.getNavigationHelper().goToHomePage();
+    app.getContactHelper().goToContactListPage();
     int after = app.getContactHelper().getContactCounter();
     Assert.assertEquals(after, before -1);
 
