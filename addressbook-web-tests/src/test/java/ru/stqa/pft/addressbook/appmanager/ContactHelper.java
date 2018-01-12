@@ -101,6 +101,13 @@ public class ContactHelper extends HelperBase {
     goToContactListPage();
   }
 
+  public void deleteContact(int index) {
+    selectContact(index);
+    submitContactDeletion();
+    acceptDeletionAlert();
+    goToContactListPage();
+  }
+
   public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
   }

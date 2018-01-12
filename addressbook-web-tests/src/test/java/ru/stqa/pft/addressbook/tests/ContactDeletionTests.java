@@ -7,7 +7,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.List;
 
-public class ContactDelationTests extends TestBase {
+public class ContactDeletionTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -20,14 +20,12 @@ public class ContactDelationTests extends TestBase {
   @Test
   public void testDeleteContact() {
     List<ContactData> before = app.getContactHelper().getContactList();
-    app.getContactHelper().selectContact(before.size() - 1);
-    app.getContactHelper().submitContactDeletion();
-    app.getContactHelper().acceptDeletionAlert();
-    app.getContactHelper().goToContactListPage();
+    int index = before.size() - 1;
+    app.getContactHelper().deleteContact(index);
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size() - 1);
 
-    before.remove(before.size() - 1);
+    before.remove(index);
     Assert.assertEquals(before, after);
 
   }
