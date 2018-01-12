@@ -120,7 +120,7 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.cssSelector("img[alt='Edit']")).size();
   }
 
-  public List<ContactData> getContactList() {
+  public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<ContactData>();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements){
