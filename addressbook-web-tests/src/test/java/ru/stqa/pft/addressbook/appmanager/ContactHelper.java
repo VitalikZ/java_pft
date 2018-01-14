@@ -93,10 +93,9 @@ public class ContactHelper extends HelperBase {
     goToContactListPage();
   }
 
-  public void modifyContact(int index) {
+  public void modifyContact(int index, ContactData contact) {
     editContactButton(index);
-    //fillEditContactForm(new ContactData("name_test", "lastname_test", "edit", "edit", "edit", null), false);
-    fillEditContactForm(new ContactData("name_test", "lastname_test", "edit", "edit", "edit", null), false);
+    fillEditContactForm(contact, false);
     submitEditContact();
     goToContactListPage();
   }
