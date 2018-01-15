@@ -1,41 +1,51 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactData {
-  private int id;
-  private final String firstName;
-  private final String lastName;
-  private final String address;
-  private final String mobilePhone;
-  private final String emailOne;
+  private int id = Integer.MAX_VALUE;
+  private String firstName;
+  private String lastName;
+  private String address;
+  private String mobilePhone;
+  private String emailOne;
   private String group;
 
   public int getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public ContactData withId(int id) {
     this.id = id;
+    return this;
   }
 
-  public ContactData(int id, String firstName, String lastName, String address, String mobilePhone, String emailOne, String group) {
-    this.id = id;
+  public ContactData withFirstName(String firstName) {
     this.firstName = firstName;
-    this.lastName = lastName;
-    this.address = address;
-    this.mobilePhone = mobilePhone;
-    this.emailOne = emailOne;
-    this.group = group;
+    return this;
   }
 
-  public ContactData(String firstName, String lastName, String address, String mobilePhone, String emailOne, String group) {
-    this.id = Integer.MAX_VALUE;
-
-    this.firstName = firstName;
+  public ContactData withLastName(String lastName) {
     this.lastName = lastName;
+    return this;
+  }
+
+  public ContactData withAddress(String address) {
     this.address = address;
+    return this;
+  }
+
+  public ContactData withMobilePhone(String mobilePhone) {
     this.mobilePhone = mobilePhone;
+    return this;
+  }
+
+  public ContactData withEmailOne(String emailOne) {
     this.emailOne = emailOne;
+    return this;
+  }
+
+  public ContactData withGroup(String group) {
     this.group = group;
+    return this;
   }
 
   public String getFirstName() {
@@ -93,5 +103,29 @@ public class ContactData {
     result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
     return result;
   }
-
 }
+
+
+
+//Delete constructors, but now I left for few time
+
+  /*public ContactData(int id, String firstName, String lastName, String address, String mobilePhone, String emailOne, String group) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.address = address;
+    this.mobilePhone = mobilePhone;
+    this.emailOne = emailOne;
+    this.group = group;
+  }
+
+  public ContactData(String firstName, String lastName, String address, String mobilePhone, String emailOne, String group) {
+    this.id = Integer.MAX_VALUE;
+
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.address = address;
+    this.mobilePhone = mobilePhone;
+    this.emailOne = emailOne;
+    this.group = group;
+  }*/
