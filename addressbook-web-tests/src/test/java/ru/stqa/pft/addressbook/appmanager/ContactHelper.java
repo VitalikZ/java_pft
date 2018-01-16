@@ -8,7 +8,9 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -112,7 +114,6 @@ public class ContactHelper extends HelperBase {
 
   private Contacts contactCache = null;
 
-
   public Contacts all() {
     if (contactCache != null){
       return new Contacts(contactCache);
@@ -120,10 +121,12 @@ public class ContactHelper extends HelperBase {
     contactCache = new Contacts();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
-      String name_test = element.findElement(By.xpath(".//td[3]")).getText();
-      String lastname_test = element.findElement(By.xpath(".//td[2]")).getText();
+      String firstname = element.findElement(By.xpath(".//td[3]")).getText();
+      String lastname = element.findElement(By.xpath(".//td[2]")).getText();
+      String[] phones = element.findElement(By.xpath(".//td[6]")).getText().split("\n");
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      contactCache.add(new ContactData().withId(id).withFirstName(name_test).withLastName(lastname_test));
+      contactCache.add(new ContactData().withId(id).withFirstName(firstname).withLastName(lastname)
+              .withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2]));
     }
     return new Contacts(contactCache);
   }
@@ -147,3 +150,23 @@ public class ContactHelper extends HelperBase {
     cells.get(7).findElement((By.tagName("a"))).click();
   }
 }
+
+
+
+
+//Like in example
+/*
+  public Set<ContactData> allTwo() {
+    Set<ContactData> contacts = new HashSet<ContactData>();
+    List<WebElement> rows = wd.findElements(By.name("entry"));
+    for (WebElement row : rows) {
+      List<WebElement> cells = row.findElements(By.tagName("td"));
+      int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
+      String lastname = cells.get(1).getText();
+      String firstname = cells.get(2).getText();
+      String[] phones = cells.get(5).getText().split("\n");
+      contacts.add(new ContactData().withId(id).withFirstName(firstname).withLastName(lastname)
+              .withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2]));
+    }
+    return contacts;
+  }*/
