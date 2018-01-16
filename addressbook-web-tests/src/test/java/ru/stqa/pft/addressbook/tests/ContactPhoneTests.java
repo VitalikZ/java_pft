@@ -11,23 +11,28 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactPhoneTests extends TestBase {
 
-  /*@BeforeMethod
+  @BeforeMethod
   public void ensurePreconditions() {
     app.contact().goToContactListPage();
     if ((app.contact().all().size() == 0)) {
       app.contact().createContact(new ContactData().withFirstName("1").withLastName("2").
-              withHomePhone("111").withMobilePhone("222").withWorkPhone("333"));
+              withHomePhone("8888888").withMobilePhone("999999999").withWorkPhone("000000000"));
     }
-  }*/
+  }
 
   @Test
-  public void testContactPhones(){
+  public void testContactPhones() {
     app.contact().goToContactListPage();
     ContactData contact = app.contact().all().iterator().next();
     ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
-    assertThat(contact.getHomePhone(), equalTo(contactInfoFromEditForm.getHomePhone()));
-    assertThat(contact.getMobilePhone(), equalTo(contactInfoFromEditForm.getMobilePhone()));
-    assertThat(contact.getWorkPhone(), equalTo(contactInfoFromEditForm.getWorkPhone()));
+    assertThat(contact.getHomePhone(), equalTo(cleaned(contactInfoFromEditForm.getHomePhone())));
+    assertThat(contact.getMobilePhone(), equalTo(cleaned(contactInfoFromEditForm.getMobilePhone())));
+    assertThat(contact.getWorkPhone(), equalTo(cleaned(contactInfoFromEditForm.getWorkPhone())));
+  }
+
+  public String cleaned(String phone){
+    return phone.replaceAll("\\s","").replaceAll("[-()]","");
+
   }
 }
