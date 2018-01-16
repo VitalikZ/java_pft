@@ -8,9 +8,7 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -29,15 +27,34 @@ public class ContactHelper extends HelperBase {
   public void fillAddNewContactForm(ContactData contactData) {
     type(By.name("firstname"), contactData.getFirstName());
     type(By.name("lastname"), contactData.getLastName());
-    type(By.name("address"), contactData.getAddress());
+    type(By.name("address"), contactData.getAddressOne());
     type(By.name("mobile"), contactData.getMobilePhone());
     type(By.name("email"), contactData.getEmailOne());
+  }
+
+  public void fillAddNewContactFormWithEmails(ContactData contactData) {
+    type(By.name("firstname"), contactData.getFirstName());
+    type(By.name("lastname"), contactData.getLastName());
+    type(By.name("address"), contactData.getAddressOne());
+    type(By.name("mobile"), contactData.getMobilePhone());
+    type(By.name("email"), contactData.getEmailOne());
+    type(By.name("email2"), contactData.getEmailTwo());
+    type(By.name("email3"), contactData.getEmailThree());
+  }
+
+  public void fillAddNewContactFormWithAddresses(ContactData contactData) {
+    type(By.name("firstname"), contactData.getFirstName());
+    type(By.name("lastname"), contactData.getLastName());
+    type(By.name("address"), contactData.getAddressOne());
+    type(By.name("mobile"), contactData.getMobilePhone());
+    type(By.name("address"), contactData.getAddressOne());
+    type(By.name("address2"), contactData.getAddressTwo());
   }
 
   public void fillEditContactForm(ContactData contactData, boolean creation) {
     type(By.name("firstname"), contactData.getFirstName());
     type(By.name("lastname"), contactData.getLastName());
-    type(By.name("address"), contactData.getAddress());
+    type(By.name("address"), contactData.getAddressOne());
     type(By.name("mobile"), contactData.getMobilePhone());
     type(By.name("email"), contactData.getEmailOne());
 
@@ -88,6 +105,22 @@ public class ContactHelper extends HelperBase {
     goToContactListPage();
   }
 
+  public void createContactWithEmails(ContactData contact) {
+    goToAddNewContactPage();
+    fillAddNewContactFormWithEmails(contact);
+    submitContactCreation();
+    contactCache = null;
+    goToContactListPage();
+  }
+
+  public void createContactWithAddresses(ContactData contact) {
+    goToAddNewContactPage();
+    fillAddNewContactFormWithAddresses(contact);
+    submitContactCreation();
+    contactCache = null;
+    goToContactListPage();
+  }
+
   public void modifyContact(ContactData contact) {
     initModifyById(contact.getId());
     fillEditContactForm(contact, false);
@@ -124,14 +157,18 @@ public class ContactHelper extends HelperBase {
       String firstname = element.findElement(By.xpath(".//td[3]")).getText();
       String lastname = element.findElement(By.xpath(".//td[2]")).getText();
       String allphones = element.findElement(By.xpath(".//td[6]")).getText();
+      String allEmails = element.findElement(By.xpath(".//td[5]")).getText();
+      String allAddresses = element.findElement(By.xpath(".//td[4]")).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       contactCache.add(new ContactData().withId(id).withFirstName(firstname).withLastName(lastname)
-              .withAllPhones(allphones));
+              .withAllPhones(allphones)
+              .withAllEmails(allEmails)
+              .withAllAddresses(allAddresses));
     }
     return new Contacts(contactCache);
   }
 
-  public ContactData infoFromEditForm(ContactData contact) {
+  public ContactData infoFromEditFormPhones(ContactData contact) {
     initContactModificationById(contact.getId());
     String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
     String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
@@ -141,6 +178,29 @@ public class ContactHelper extends HelperBase {
     wd.navigate().back();
     return new ContactData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname)
             .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
+  }
+
+  public ContactData infoFromEditFormEmails(ContactData contact) {
+    initContactModificationById(contact.getId());
+    String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+    String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+    String emailOne = wd.findElement(By.name("email")).getAttribute("value");
+    String emailTwo = wd.findElement(By.name("email2")).getAttribute("value");
+    String emailThree = wd.findElement(By.name("email3")).getAttribute("value");
+    wd.navigate().back();
+    return new ContactData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname)
+            .withEmailOne(emailOne).withEmailTwo(emailTwo).withEmailTree(emailThree);
+  }
+
+  public ContactData infoFromEditFormAddresses(ContactData contact) {
+    initContactModificationById(contact.getId());
+    String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+    String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+    String addressOne = wd.findElement(By.name("address")).getAttribute("value");
+    String addressTwo = wd.findElement(By.name("address2")).getAttribute("value");
+    wd.navigate().back();
+    return new ContactData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname)
+            .withAddressOne(addressOne).withAddressTwo(addressTwo);
   }
 
   private void initContactModificationById(int id){
