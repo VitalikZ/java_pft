@@ -17,7 +17,7 @@ public class ContactAddressesTests extends TestBase{
     app.contact().goToContactListPage();
     if ((app.contact().all().size() == 0)) {
       app.contact().createContactWithAddresses(new ContactData().withFirstName("1").withLastName("2").
-              withAddressOne("World").withAddressTwo("Continent"));
+              withAddressOne("World"));
     }
   }
 
