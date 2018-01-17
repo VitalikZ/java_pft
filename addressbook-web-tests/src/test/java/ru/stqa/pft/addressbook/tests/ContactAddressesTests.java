@@ -17,7 +17,7 @@ public class ContactAddressesTests extends TestBase{
     app.contact().goToContactListPage();
     if ((app.contact().all().size() == 0)) {
       app.contact().createContactWithAddresses(new ContactData().withFirstName("1").withLastName("2").
-              withAddressOne("World"));
+              withAddressOne("World").withAddressTwo("Continent"));
     }
   }
 
@@ -27,10 +27,10 @@ public class ContactAddressesTests extends TestBase{
     ContactData contact = app.contact().all().iterator().next();
     ContactData contactInfoFromEditForm = app.contact().infoFromEditFormAddresses(contact);
 
-    assertThat(contact.getAllAddresses(), equalTo(mergeAddresses(contactInfoFromEditForm)));
+    assertThat(contact.getAllAddresses(), equalTo(contactInfoFromEditForm.getAddressOne()));
   }
 
-  private String mergeAddresses(ContactData contact) {
+/*  private String mergeAddresses(ContactData contact) {
     return Arrays.asList(contact.getAddressOne(), contact.getAddressTwo())
             .stream().filter((s -> !s.equals("")))
             .map(ContactAddressesTests::cleaned)
@@ -40,5 +40,5 @@ public class ContactAddressesTests extends TestBase{
   public static String cleaned(String email){
     return email.replaceAll("\\s","").replaceAll("[-()]","");
 
-  }
+  }*/
 }

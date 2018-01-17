@@ -200,7 +200,7 @@ public class ContactHelper extends HelperBase {
     String addressTwo = wd.findElement(By.name("address2")).getAttribute("value");
     wd.navigate().back();
     return new ContactData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname)
-            .withAddressOne(addressOne).withAddressTwo(addressTwo);
+            .withAddressOne(addressOne);
   }
 
   private void initContactModificationById(int id){
