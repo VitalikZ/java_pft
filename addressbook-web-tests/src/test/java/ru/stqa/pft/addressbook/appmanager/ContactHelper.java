@@ -30,6 +30,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("address"), contactData.getAddressOne());
     type(By.name("mobile"), contactData.getMobilePhone());
     type(By.name("email"), contactData.getEmailOne());
+    attach(By.name("photo"), contactData.getPhoto());
   }
 
   public void fillAddNewContactFormWithEmails(ContactData contactData) {
