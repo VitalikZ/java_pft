@@ -32,6 +32,21 @@ public class ContactCreationTests extends TestBase {
 
 
 
+/*  @Test
+  public void testCreateContactWithPhoto() {
+    app.contact().goToContactListPage();
+    Contacts before = app.contact().all();
+    File photo = new File("src/test/resources/stu.png");
+    ContactData contact = new ContactData().withLastName("test1LastName").withFirstName("test2firstName").withPhoto(photo);
+    app.contact().createContact(contact);
+    Contacts after = app.contact().all();
+    assertThat(app.contact().getContactCounter(), equalTo(before.size() + 1));
+    assertThat(after, equalTo(
+            before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+  }*/
+
+
+
 
 
   /*@Test

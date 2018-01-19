@@ -20,13 +20,12 @@ public class ContactData {
   private String allAddresses;
   private File photo;
 
-  public File getPhoto() {
-    return photo;
+  public int getId() {
+    return id;
   }
 
-  public ContactData withPhoto(File photo) {
-    this.photo = photo;
-    return this;
+  public File getPhoto() {
+    return photo;
   }
 
   public String getAllPhones() {
@@ -56,9 +55,9 @@ public class ContactData {
     return this;
   }
 
-
-  public int getId() {
-    return id;
+  public ContactData withPhoto(File photo) {
+    this.photo = photo;
+    return this;
   }
 
   public ContactData withId(int id) {
