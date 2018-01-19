@@ -43,9 +43,9 @@ public class GroupDataGenerator {
     List<GroupData> groups = generateGroups(count);
     if (format.equals("csv")) {
       saveAsCsv(groups, new File(file));
-    } else if (format.equals("xml")) {
-      saveAsJson(groups, new File(file));
     } else if (format.equals("json")) {
+      saveAsJson(groups, new File(file));
+    } else if (format.equals("xml")) {
       saveAsXml(groups, new File(file));
     } else {
       System.out.println("Unrecognized format " + format);
@@ -53,7 +53,7 @@ public class GroupDataGenerator {
   }
 
   private void saveAsJson(List<GroupData> groups, File file) throws IOException {
-    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
     String json = gson.toJson(groups);
     Writer writer = new FileWriter(file);
     writer.write(json);

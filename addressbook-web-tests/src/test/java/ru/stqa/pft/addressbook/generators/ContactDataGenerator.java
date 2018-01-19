@@ -43,16 +43,16 @@ public class ContactDataGenerator {
     if (format.equals("csv")) {
       saveAsCsv(contacts, new File(file));
     } else if (format.equals("xml")) {
-      saveAsJson(contacts, new File(file));
-    } else if (format.equals("json")) {
       saveAsXml(contacts, new File(file));
+    } else if (format.equals("json")) {
+      saveAsJson(contacts, new File(file));
     } else {
       System.out.println("Unrecognized format " + format);
     }
   }
 
   private void saveAsJson(List<ContactData> contacts, File file) throws IOException {
-    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
     String json = gson.toJson(contacts);
     Writer writer = new FileWriter(file);
     writer.write(json);
