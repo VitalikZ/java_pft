@@ -37,7 +37,7 @@ public class ContactCreationTests extends TestBase {
       return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
     }
   }
-  
+
   @DataProvider
   public Iterator<Object[]> validContactsFromJson() throws IOException {
     try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")))){
@@ -78,11 +78,6 @@ public class ContactCreationTests extends TestBase {
   }
 */
 
-
-
-
-
-
 /*  @Test
   public void testCreateContactWithPhoto() {
     app.contact().goToContactListPage();
@@ -95,10 +90,6 @@ public class ContactCreationTests extends TestBase {
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }*/
-
-
-
-
 
   /*@Test
   public void testBadCreateContact() {
