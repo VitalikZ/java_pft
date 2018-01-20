@@ -31,7 +31,7 @@ public class ApplicationManager {
       //wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("/usr/lib/firefox-esr/firefox-esr")); //for ubuntu
       wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("C:/Program Files/Mozilla Firefox/firefox.exe"));
     } else if (Objects.equals(browser, BrowserType.CHROME)){
-      wd = new ChromeDriver(new ChromeOptions().setBinary("C:/Program Files(x86)/Google/Chrome/Application.chromedriver.exe"));
+      wd = new ChromeDriver();
     } else if (Objects.equals(browser, BrowserType.IE)){
       wd = new InternetExplorerDriver();
     }
