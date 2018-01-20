@@ -2,6 +2,7 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -27,10 +28,10 @@ public class ApplicationManager {
 
   public void init() {
     if (Objects.equals(browser, BrowserType.FIREFOX)) {
-      wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("/usr/lib/firefox-esr/firefox-esr")); //for ubuntu
-      //wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("C:/Program Files/Mozilla Firefox/firefox.exe"));
+      //wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("/usr/lib/firefox-esr/firefox-esr")); //for ubuntu
+      wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("C:/Program Files/Mozilla Firefox/firefox.exe"));
     } else if (Objects.equals(browser, BrowserType.CHROME)){
-      wd = new ChromeDriver();
+      wd = new ChromeDriver(new ChromeOptions().setBinary("C:/Program Files(x86)/Google/Chrome/Application.chromedriver.exe"));
     } else if (Objects.equals(browser, BrowserType.IE)){
       wd = new InternetExplorerDriver();
     }
