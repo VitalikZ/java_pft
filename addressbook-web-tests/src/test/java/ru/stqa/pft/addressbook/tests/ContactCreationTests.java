@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -40,19 +41,19 @@ public class ContactCreationTests extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validContactsFromJson() throws IOException {
-    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")))){
-    String json = "";
-    String line = reader.readLine();
-    while (line != null) {
-      json += line;
-      line = reader.readLine();
+    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")))) {
+      String json = "";
+      String line = reader.readLine();
+      while (line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<ContactData> contacts = gson.fromJson(json, new TypeToken<List<ContactData>>() {
+      }.getType());
+      return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
     }
-    Gson gson = new Gson();
-    List<ContactData> contacts = gson.fromJson(json, new TypeToken<List<ContactData>>() {
-    }.getType());
-    return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
   }
-}
 
   @Test(dataProvider = "validContactsFromJson")
   public void testCreateContact(ContactData contact) {
@@ -65,19 +66,36 @@ public class ContactCreationTests extends TestBase {
             before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
     verifyContactListInUI();
   }
-}
-/*
-  @Test(dataProvider = "validGroups")
-  public void testGroupCreation(GroupData group) {
-    app.goTo().groupPage();
-    Groups before = app.group().all();
-    app.group().create(group);
-    assertThat(app.group().getGroupCount(), equalTo(before.size() + 1));
-    Groups after = app.group().all();
+
+  @Test(dataProvider = "validContactsFromJson")
+  public void testCreateContact2(ContactData contact) {
+    app.contact().goToContactListPage();
+    Contacts before = app.db().contacts();
+    app.contact().createContact(contact);
+    assertThat(app.contact().getContactCounter(), equalTo(before.size() + 1));
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(
-            before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+            before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+    verifyContactListInUI();
   }
-*/
+
+  @Test(enabled = false)
+  public void testCreateContactExampleInL76(ContactData contact) {
+    Groups groups = app.db().groups();
+    app.contact().goToContactListPage();
+    Contacts before = app.db().contacts();
+    app.contact().createContact(contact.inGroup(groups.iterator().next()));
+    assertThat(app.contact().getContactCounter(), equalTo(before.size() + 1));
+    Contacts after = app.db().contacts();
+    assertThat(after, equalTo(
+            before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+    verifyContactListInUI();
+  }
+}
+
+
+
+
 
 /*  @Test
   public void testCreateContactWithPhoto() {

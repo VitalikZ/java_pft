@@ -1,10 +1,14 @@
 package ru.stqa.pft.addressbook.model;
 
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import jdk.internal.org.objectweb.asm.tree.InsnList;
+import net.bytebuddy.agent.builder.AgentBuilder;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -53,8 +57,10 @@ public class ContactData {
   @Transient
   private String emailThree;
 
-  @Transient
-  private String group;
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups",
+          joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
 
   @Transient
   private String allPhones;
@@ -163,11 +169,6 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withGroup(String group) {
-    this.group = group;
-    return this;
-  }
-
   public String getFirstName() {
 
     return firstName;
@@ -218,8 +219,8 @@ public class ContactData {
     return emailThree;
   }
 
-  public String getGroup() {
-    return group;
+  public Groups getGroups() {
+    return new Groups(groups);
   }
 
   @Override
@@ -251,6 +252,10 @@ public class ContactData {
     return result;
   }
 
+  public ContactData inGroup(GroupData group) {
+    groups.add(group);
+    return this;
+  }
 }
 
 
