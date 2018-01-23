@@ -1,1 +1,77 @@
-[{"id":2147483647,"firstName":"test 0","lastName":"test 0"},{"id":2147483647,"firstName":"test 1","lastName":"test 1"},{"id":2147483647,"firstName":"test 2","lastName":"test 2"},{"id":2147483647,"firstName":"test 3","lastName":"test 3"},{"id":2147483647,"firstName":"test 4","lastName":"test 4"},{"id":2147483647,"firstName":"test 5","lastName":"test 5"},{"id":2147483647,"firstName":"test 6","lastName":"test 6"},{"id":2147483647,"firstName":"test 7","lastName":"test 7"},{"id":2147483647,"firstName":"test 8","lastName":"test 8"},{"id":2147483647,"firstName":"test 9","lastName":"test 9"},{"id":2147483647,"firstName":"test 10","lastName":"test 10"},{"id":2147483647,"firstName":"test 11","lastName":"test 11"},{"id":2147483647,"firstName":"test 12","lastName":"test 12"},{"id":2147483647,"firstName":"test 13","lastName":"test 13"},{"id":2147483647,"firstName":"test 14","lastName":"test 14"}]
+<list>
+  <contact>
+    <firstName>test 0</firstName>
+    <lastName>test 0</lastName>
+    <groups/>
+  </contact>
+  <contact>
+    <firstName>test 1</firstName>
+    <lastName>test 1</lastName>
+    <groups/>
+  </contact>
+  <contact>
+    <firstName>test 2</firstName>
+    <lastName>test 2</lastName>
+    <groups/>
+  </contact>
+  <contact>
+    <firstName>test 3</firstName>
+    <lastName>test 3</lastName>
+    <groups/>
+  </contact>
+  <contact>
+    <firstName>test 4</firstName>
+    <lastName>test 4</lastName>
+    <groups/>
+  </contact>
+  <contact>
+    <firstName>test 5</firstName>
+    <lastName>test 5</lastName>
+    <groups/>
+  </contact>
+  <contact>
+    <firstName>test 6</firstName>
+    <lastName>test 6</lastName>
+    <groups/>
+  </contact>
+  <contact>
+    <firstName>test 7</firstName>
+    <lastName>test 7</lastName>
+    <groups/>
+  </contact>
+  <contact>
+    <firstName>test 8</firstName>
+    <lastName>test 8</lastName>
+    <groups/>
+  </contact>
+  <contact>
+    <firstName>test 9</firstName>
+    <lastName>test 9</lastName>
+    <groups/>
+  </contact>
+  <contact>
+    <firstName>test 10</firstName>
+    <lastName>test 10</lastName>
+    <groups/>
+  </contact>
+  <contact>
+    <firstName>test 11</firstName>
+    <lastName>test 11</lastName>
+    <groups/>
+  </contact>
+  <contact>
+    <firstName>test 12</firstName>
+    <lastName>test 12</lastName>
+    <groups/>
+  </contact>
+  <contact>
+    <firstName>test 13</firstName>
+    <lastName>test 13</lastName>
+    <groups/>
+  </contact>
+  <contact>
+    <firstName>test 14</firstName>
+    <lastName>test 14</lastName>
+    <groups/>
+  </contact>
+</list>
