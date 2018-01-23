@@ -68,27 +68,18 @@ public class ContactCreationTests extends TestBase {
   }
 
   @Test(dataProvider = "validContactsFromJson")
-  public void testCreateContact2(ContactData contact) {
-    app.contact().goToContactListPage();
-    Contacts before = app.db().contacts();
-    app.contact().createContact(contact);
-    assertThat(app.contact().getContactCounter(), equalTo(before.size() + 1));
-    Contacts after = app.db().contacts();
-    assertThat(after, equalTo(
-            before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-    verifyContactListInUI();
-  }
-
-  @Test(enabled = false)
-  public void testCreateContactExampleInL76(ContactData contact) {
+  public void testCreateContactExample(ContactData contact) {
     Groups groups = app.db().groups();
+    File photo = new File("src/test/resources/stu.png");
+    ContactData newContact = new ContactData().withLastName("1test1LastName").withFirstName("2test2firstName").withPhoto(photo)
+            .inGroup(groups.iterator().next());
     app.contact().goToContactListPage();
     Contacts before = app.db().contacts();
-    app.contact().createContact(contact.inGroup(groups.iterator().next()));
+    app.contact().goToAddNewContactPage();
+    app.contact().fillEditContactForm(newContact, true);
+    app.contact().submitContactCreation();
+    app.contact().goToContactListPage();
     assertThat(app.contact().getContactCounter(), equalTo(before.size() + 1));
-    Contacts after = app.db().contacts();
-    assertThat(after, equalTo(
-            before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
     verifyContactListInUI();
   }
 }
