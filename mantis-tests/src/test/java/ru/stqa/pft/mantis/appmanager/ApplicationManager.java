@@ -53,6 +53,6 @@ public class ApplicationManager {
 
   public String getProperty(String key) {
 
-    return null;
+    return properties.getProperty(key);
   }
 }
