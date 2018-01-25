@@ -31,7 +31,7 @@ public class HttpSession {
     params.add(new BasicNameValuePair("password", password));
     params.add(new BasicNameValuePair("secure_session", "on"));
     params.add(new BasicNameValuePair("return", "index.php"));
-    post.setEntity((new UrlEncodedFormEntity(params)));
+    post.setEntity(new UrlEncodedFormEntity(params));
     CloseableHttpResponse response = httpClient.execute(post);
     String body = getTextFrom(response);
     return body.contains(String.format("<span class=\"italic\">%s</span>", username));
