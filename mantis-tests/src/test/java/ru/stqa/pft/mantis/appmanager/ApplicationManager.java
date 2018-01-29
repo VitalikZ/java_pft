@@ -23,6 +23,8 @@ public class ApplicationManager {
   private RegistrationHelper registrationHelper;
   private FtpHelper ftp;
   private MailHelper mailHelper;
+  private SessionHelper sessionHelper;
+  private DbHelper dbHelper;
   private JamesHelper jamesHelper;
 
 
@@ -34,6 +36,7 @@ public class ApplicationManager {
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+    dbHelper = new DbHelper();
   }
 
   public void stop() {
@@ -65,6 +68,13 @@ public class ApplicationManager {
     return ftp;
   }
 
+  public SessionHelper session(){
+    if(sessionHelper == null){
+      sessionHelper = new SessionHelper(this);
+    }
+    return sessionHelper;
+  }
+
 
   public WebDriver getDriver() {
     if (wd == null){
@@ -88,6 +98,10 @@ public class ApplicationManager {
       mailHelper = new MailHelper(this);
     }
     return mailHelper;
+  }
+
+  public DbHelper db() {
+    return dbHelper;
   }
 
   public JamesHelper james(){

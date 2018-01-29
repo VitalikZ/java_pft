@@ -14,19 +14,18 @@ public class DbHelper {
 
   private final SessionFactory sessionFactory;
 
-  public DbHelper() {
-    // A SessionFactory is set up once for an application!
+  public DbHelper(){
     final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
             .configure() // configures settings from hibernate.cfg.xml
             .build();
+    sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
 
-    sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
   }
 
-  public User user() {
+  public User user(){
     Session session = sessionFactory.openSession();
     session.beginTransaction();
-    List<UserData> result = session.createQuery("from UserData").list();
+    List<UserData> result = session.createQuery( "from mantis_user_table").list();
     session.getTransaction().commit();
     session.close();
     return new User(result);
