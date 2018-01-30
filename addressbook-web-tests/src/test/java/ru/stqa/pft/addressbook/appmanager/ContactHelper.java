@@ -109,6 +109,14 @@ public class ContactHelper extends HelperBase {
     goToContactListPage();
   }
 
+  public void createContactNew(ContactData contact) {
+    goToAddNewContactPage();
+    fillEditContactForm(contact, true);
+    submitContactCreation();
+    contactCache = null;
+    goToContactListPage();
+  }
+
   public void createContactWithEmails(ContactData contact) {
     goToAddNewContactPage();
     fillAddNewContactFormWithEmails(contact);
