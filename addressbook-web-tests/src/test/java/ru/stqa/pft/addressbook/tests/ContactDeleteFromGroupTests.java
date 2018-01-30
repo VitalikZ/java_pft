@@ -3,6 +3,7 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
@@ -12,17 +13,17 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ContactAddToGroupTests extends TestBase {
+public class ContactDeleteFromGroupTests extends TestBase {
 
   @BeforeMethod
-  public void ensurePreconditions() {
-    List<Groups> listGroups= new ArrayList<Groups>();
-    for(ContactData cd:app.db().contacts())
-    {
+  public void preCondition() {
+
+    List<Groups> listGroups = new ArrayList<Groups>();
+    for (ContactData cd : app.db().contacts()) {
       listGroups.add(cd.getGroups());
     }
-    if(listGroups.size() == 0) {
-      if(app.db().groups().size() == 0){
+    if (listGroups.size() == 0) {
+      if (app.db().groups().size() == 0) {
         app.goTo().groupPage();
         GroupData group = new GroupData().withName("test1")
                 .withHeader("test2")
@@ -36,15 +37,18 @@ public class ContactAddToGroupTests extends TestBase {
   }
 
   @Test
-  public void testAddContactToGroup() {
-    app.goTo().groupPage();
-    GroupData group = new GroupData().withName("test1").withHeader("test2").withFooter("test3");
-    app.group().create(group);
-    Groups after = app.db().groups();
+  public void deleteFromGroupTest() {
+    Contacts contacts = app.db().contacts();
+    ContactData contact = new ContactData();
+    for (ContactData cd : contacts) {
+      if (!cd.getGroups().isEmpty()) {
+        contact = cd;
+        break;
+      }
+    }
+    GroupData group = contact.getGroups().iterator().next();
     app.goTo().goToHomePage();
-    ContactData contact = app.db().contacts().iterator().next();
-    Groups groupsBefore = contact.getGroups();
-    app.contact().addToGroup(contact, group.withId(after.stream().mapToInt(g -> g.getId()).max().getAsInt()));
+    app.contact().deleteFromGroup(contact, group);
     Groups groupsAfter = new Groups();
     for (ContactData cd : app.db().contacts()) {
       if (cd.getId() == contact.getId()) {
@@ -52,7 +56,6 @@ public class ContactAddToGroupTests extends TestBase {
         break;
       }
     }
-    assertThat(groupsAfter.size(), equalTo(groupsBefore.size() + 1));
-    assertThat(groupsAfter, equalTo(groupsBefore.withAdded(group.withId(after.stream().mapToInt(g -> g.getId()).max().getAsInt()))));
+    assertThat(groupsAfter, equalTo(contact.getGroups().without(group)));
   }
 }
