@@ -26,6 +26,9 @@ public class ChangePasswordTests extends TestBase {
     String password = "password";
     User users = app.db().user();
     UserData resetUserPass = users.iterator().next();
+    if (resetUserPass.getUserName() == "administrator") {
+      resetUserPass = app.db().user().iterator().next();
+    }
     UserData randomUser = new UserData().withId(resetUserPass.getId()).withEmail(resetUserPass.getEmail()).withUsername(resetUserPass.getUserName());
     app.session().loginToSystem();
     app.session().goToManageUsersPage();
