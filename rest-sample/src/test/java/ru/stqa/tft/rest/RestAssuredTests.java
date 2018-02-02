@@ -19,9 +19,21 @@ import static org.testng.Assert.assertEquals;
 public class RestAssuredTests extends TestBase{
 
   @Test
-  public void testCreateIssue() throws IOException {
+  public void testCreateIssueIfResolved() throws IOException {
+    skipIfNotFixed(859);
     Set<Issue> oldIssues = getIssues();
-    Issue newIssue = new Issue().withSubject("Test issue1233312333").withDescription("New test issue1233312333");
+    Issue newIssue = new Issue().withSubject("Test issueQQQQ").withDescription("New test issue1233312333");
+    int issueId = createIssue(newIssue);
+    Set<Issue> newIssues = getIssues();
+    oldIssues.add(newIssue.withId(issueId));
+    assertEquals(newIssues, oldIssues);
+  }
+
+  @Test
+  public void testCreateIssueIfNotResolved() throws IOException {
+    skipIfNotFixed(858);
+    Set<Issue> oldIssues = getIssues();
+    Issue newIssue = new Issue().withSubject("Test issueQQQQ").withDescription("New test issue1233312333");
     int issueId = createIssue(newIssue);
     Set<Issue> newIssues = getIssues();
     oldIssues.add(newIssue.withId(issueId));
