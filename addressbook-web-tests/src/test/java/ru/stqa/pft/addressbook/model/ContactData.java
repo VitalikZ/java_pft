@@ -1,17 +1,14 @@
 package ru.stqa.pft.addressbook.model;
 
-import java.io.File;
-import java.util.HashSet;
-import java.util.Set;
-
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import jdk.internal.org.objectweb.asm.tree.InsnList;
-import net.bytebuddy.agent.builder.AgentBuilder;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -257,7 +254,6 @@ public class ContactData {
     return this;
   }
 }
-
 
 
 //Delete constructors, but now I left for few time
