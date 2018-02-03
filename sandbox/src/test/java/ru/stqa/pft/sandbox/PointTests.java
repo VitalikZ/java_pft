@@ -9,7 +9,7 @@ public class PointTests {
   public void testPointDistanceIsWright() {
     Point point1 = new Point(0, 0);
     Point point2 = new Point(3, 4);
-    Assert.assertEquals(point1.distance(point2), 5.0);
+    Assert.assertEquals(point1.distance(point2), 50.0);
   }
 
   @Test
