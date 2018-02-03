@@ -49,6 +49,7 @@ public class ApplicationManager {
         //wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("/usr/lib/firefox-esr/firefox-esr")); //for ubuntu
         wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("C:/Program Files/Mozilla Firefox/firefox.exe"));
       } else if (Objects.equals(browser, BrowserType.CHROME)) {
+        System.setProperty("webdriver.chrome.driver","D:/Tools/chromedriver.exe");
         wd = new ChromeDriver();
       } else if (Objects.equals(browser, BrowserType.IE)) {
         wd = new InternetExplorerDriver();
@@ -56,6 +57,7 @@ public class ApplicationManager {
     } else {
       DesiredCapabilities capabilities = new DesiredCapabilities();
       capabilities.setBrowserName(browser);
+      capabilities.setPlatform(org.openqa.selenium.Platform.WINDOWS);
       wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
     }
 
