@@ -57,7 +57,7 @@ public class ApplicationManager {
     } else {
       DesiredCapabilities capabilities = new DesiredCapabilities();
       capabilities.setBrowserName(browser);
-      //capabilities.setPlatform(org.openqa.selenium.Platform.WINDOWS);
+      capabilities.setPlatform(org.openqa.selenium.Platform.WINDOWS);
       wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
     }
 
