@@ -54,9 +54,10 @@ public class ApplicationManager {
         wd = new InternetExplorerDriver();
       }
     } else {
+      System.setProperty("webdriver.chrome.driver","D:/Tools/chromedriver.exe");
       DesiredCapabilities capabilities = new DesiredCapabilities();
       capabilities.setBrowserName(browser);
-      capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "win10")));
+      capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "win")));
       wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
     }
 
