@@ -25,7 +25,7 @@ public class DbHelper {
   public User user(){
     Session session = sessionFactory.openSession();
     session.beginTransaction();
-    List<UserData> result = session.createQuery( "from mantis_user_table").list();
+    List<UserData> result = session.createQuery( "from mantis_user_table where access_level = 25").list();
     session.getTransaction().commit();
     session.close();
     return new User(result);
